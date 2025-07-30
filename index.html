@@ -352,27 +352,22 @@ function shareKakao() {
 
     Kakao.Link.sendDefault({
       objectType: 'text',
-      text: `솔로몬의 선택 이상형 테스트 결과는:\n${resultText}`, // 결과 텍스트를 메인 메시지로
+      text: `🌈 솔로몬의 선택 이상형 테스트 결과는:\n\n${resultText}
+
+🎟️ 행사 신청하러 가기 👉 ${eventLink}`,
       link: {
-        webUrl: testLink, // 이 링크는 메시지 전체의 메인 링크
+        webUrl: testLink,
         mobileWebUrl: testLink
       },
       buttons: [
         {
-          title: '테스트 다시하기',
+          title: '🔁 테스트 다시 하기',
           link: {
             webUrl: testLink,
-            mobileWebUrl: testLink,
-          },
-        },
-        {
-          title: '행사 신청하러 가기', // 행사 신청 링크 버튼
-          link: {
-            webUrl: eventLink,
-            mobileWebUrl: eventLink,
-          },
-        },
-      ],
+            mobileWebUrl: testLink
+          }
+        }
+      ]
     });
   } else {
     alert('카카오톡 공유 기능을 사용할 수 없습니다.');
