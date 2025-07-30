@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.5.0/kakao.min.js" crossorigin="anonymous"></script>
-<script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
   Kakao.init('939f16955e2d7c36b1281d8981b8b423'); // 본인의 JavaScript 키 사용
 </script>
   <meta charset="UTF-8">
@@ -74,6 +73,25 @@
       text-align: center;
       width: 90%; /* 너비 조정 */
     }
+    .share-menu {
+      /* 기존 display: none; position: absolute; background: white; border: 1px solid #ddd; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); z-index: 100; margin-top: 5px; 이 부분은 HTML에 style=""로 남아있으니, CSS에서는 이 새로운 flex 관련 속성들만 추가하면 됩니다. */
+      display: flex;       /* 가로 배치를 위한 flex 설정 */
+      flex-direction: row; /* 가로 방향으로 배치 */
+      flex-wrap: wrap;     /* 공간이 부족하면 다음 줄로 넘김 */
+      width: auto;         /* 내용에 따라 너비 자동 조절 */
+      padding: 5px;        /* 내부 여백 유지 */
+      /* min-width: 300px;  // 필요하다면 최소 너비 설정 (짤림 방지) */
+      box-sizing: border-box; /* 패딩이 너비 계산에 포함되도록 */
+      max-width: 100%; /* 부모 너비를 넘지 않도록 (가로 스크롤 방지) */
+    }
+
+    .share-menu-item {
+      flex: 1;               /* 각 버튼이 균등하게 공간 차지 */
+      margin: 2px;           /* 버튼들 사이 간격 */
+      white-space: nowrap;   /* 텍스트 줄바꿈 방지 */
+      min-width: fit-content; /* 버튼 내용에 맞춰 최소 너비 설정 */
+    }
+  
     #result {
       height: auto;
       min-height: 420px;
@@ -241,13 +259,13 @@
         <p id="resultText"><strong>결과 분석 중...</strong></p>
       <div class="share-container" style="position: relative; display: inline-block;">
         <button onclick="toggleShareMenu()" class="share-main-button">📤 내 결과 공유하기</button>
-        <div id="shareMenu" class="share-menu" style="display: none; position: absolute; background: white; border: 1px solid #ddd; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); z-index: 100; margin-top: 5px;">
-          <button onclick="copyLink()" class="share-menu-item">🔗 링크 복사</button>
-          <button onclick="shareKakao()" class="share-menu-item">💬 카카오톡 공유</button>
-          <button onclick="shareLine()" class="share-menu-item">📲 라인 공유</button>
-          <button onclick="shareFacebook()" class="share-menu-item">📘 페이스북 공유</button>
-          <button onclick="shareX()" class="share-menu-item">✖️ X 공유</button>
-        </div>
+        <div id="shareMenu" class="share-menu" style="display: none; position: absolute; background: white; border: 1px solid #ddd; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); z-index: 100; margin-top: 5px; left: 50%; transform: translateX(-50%);">
+  <button onclick="copyLink()" class="share-menu-item">🔗 링크 복사</button>
+  <button onclick="shareKakao()" class="share-menu-item">💬 카카오톡</button>
+  <button onclick="shareLine()" class="share-menu-item">📲 라인</button>
+  <button onclick="shareFacebook()" class="share-menu-item">📘 페이스북</button>
+  <button onclick="shareX()" class="share-menu-item">✖️ X</button>
+</div>
       </div>
     <!-- 여기에 새로운 멘트 추가 -->
         <p style="font-size: 14px; margin-top: 20px; margin-bottom: 10px; line-height: 1.4;">
