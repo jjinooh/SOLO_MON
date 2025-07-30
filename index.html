@@ -282,12 +282,6 @@ function showResult() {
 
   const result = results[maxLetter] || results.DEFAULT;
   document.getElementById("resultText").innerHTML = `<p><strong>${result.title}</strong></p><p>${result.desc}</p>`;
-  
-  // 결과가 표시된 후 자동으로 공유 메뉴 열기
-  setTimeout(() => {
-    toggleShareMenu();
-  }, 500); // 0.5초 후에 공유 메뉴 표시 (결과가 완전히 로드된 후)
-}
 
     function toggleShareMenu() {
   const menu = document.getElementById('shareMenu');
