@@ -311,22 +311,53 @@ function toggleShareMenu() {
 }
 
 function copyLink() {
-  const link = "https://jjinooh.github.io/SOLO_MON/";
-  navigator.clipboard.writeText(link)
-    .then(() => alert("링크가 복사되었습니다!"))
+  const testLink = "https://jjinooh.github.io/SOLO_MON/";
+  const eventLink = "https://www.seongnam.go.kr/apply/view.do?appIdx=2987&currentPage=1";
+  const resultText = document.getElementById("resultText").innerText; // 결과 텍스트 가져오기
+
+  const shareContent = `
+솔로몬의 선택 이상형 테스트 결과는?
+${resultText}
+
+테스트 참여하기 👉 ${testLink}
+'내 이상형을 만날 기회!' 성남시 'SOLO MON의 선택' 신청하기 👉 ${eventLink}
+`.trim(); // 템플릿 리터럴로 내용 조합 및 앞뒤 공백 제거
+
+  navigator.clipboard.writeText(shareContent)
+    .then(() => alert("결과가 클립보드에 복사되었어요! 친구에게 붙여넣기 해보세요 ✨"))
     .catch(err => alert("링크 복사에 실패했습니다: " + err));
   toggleShareMenu();
 }
 
 function shareKakao() {
   if (typeof Kakao !== 'undefined') {
+    const testLink = "https://jjinooh.github.io/SOLO_MON/";
+    const eventLink = "https://www.seongnam.go.kr/apply/view.do?appIdx=2987&currentPage=1";
+    const resultText = document.getElementById("resultText").innerText;
+
     Kakao.Link.sendDefault({
       objectType: 'text',
-      text: '내 이상형 테스트 결과를 확인해보세요!',
+      text: `솔로몬의 선택 이상형 테스트 결과는:\n${resultText}`, // 결과 텍스트를 메인 메시지로
       link: {
-        webUrl: 'https://jjinooh.github.io/SOLO_MON/',
-        mobileWebUrl: 'https://jjinooh.github.io/SOLO_MON/'
-      }
+        webUrl: testLink, // 이 링크는 메시지 전체의 메인 링크
+        mobileWebUrl: testLink
+      },
+      buttons: [
+        {
+          title: '테스트 다시하기',
+          link: {
+            webUrl: testLink,
+            mobileWebUrl: testLink,
+          },
+        },
+        {
+          title: '행사 신청하러 가기', // 행사 신청 링크 버튼
+          link: {
+            webUrl: eventLink,
+            mobileWebUrl: eventLink,
+          },
+        },
+      ],
     });
   } else {
     alert('카카오톡 공유 기능을 사용할 수 없습니다.');
@@ -335,21 +366,52 @@ function shareKakao() {
 }
 
 function shareLine() {
-  const url = "https://social-plugins.line.me/lineit/share?url=" + encodeURIComponent("https://jjinooh.github.io/SOLO_MON/");
+  const testLink = "https://jjinooh.github.io/SOLO_MON/";
+  const eventLink = "https://www.seongnam.go.kr/apply/view.do?appIdx=2987&currentPage=1";
+  const resultText = document.getElementById("resultText").innerText;
+
+  const shareMessage = `솔로몬의 선택 이상형 테스트 결과는:
+${resultText}
+
+테스트 참여하기: ${testLink}
+행사 신청하기: ${eventLink}`;
+
+  const url = "https://social-plugins.line.me/lineit/share?url=" + encodeURIComponent(testLink) + "&text=" + encodeURIComponent(shareMessage);
   window.open(url, '_blank');
   toggleShareMenu();
 }
 
 function shareFacebook() {
-  const url = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent("https://jjinooh.github.io/SOLO_MON/");
+  const testLink = "https://jjinooh.github.io/SOLO_MON/";
+  const eventLink = "https://www.seongnam.go.kr/apply/view.do?appIdx=2987&currentPage=1";
+  const resultText = document.getElementById("resultText").innerText;
+
+  const shareMessage = `솔로몬의 선택 이상형 테스트 결과는:
+${resultText}
+
+테스트 참여하기: ${testLink}
+'내 이상형을 만날 기회!' 성남시 'SOLO MON의 선택' 신청하기: ${eventLink}`;
+
+  // Facebook은 'u' 파라미터를 통해 공유할 URL을 지정합니다. 여기에 테스트 링크를 넣고, 텍스트는 Facebook이 알아서 추출하도록 하거나, 공유 창에서 사용자가 직접 입력하도록 유도합니다.
+  // Facebook은 외부에서 텍스트를 강제로 주입하는 것을 제한하는 경우가 많아, 링크를 기본으로 공유하고 추가 텍스트는 사용자가 작성하는 방식이 일반적입니다.
+  const url = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(testLink) + "&quote=" + encodeURIComponent(shareMessage);
   window.open(url, '_blank');
   toggleShareMenu();
 }
 
-function shareX() {
-  const text = encodeURIComponent("내 이상형 테스트 결과를 확인해보세요!");
-  const url = encodeURIComponent("https://jjinooh.github.io/SOLO_MON/");
-  window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+function shareX() { // 이전 Twitter (X)
+  const testLink = "https://jjinooh.github.io/SOLO_MON/";
+  const eventLink = "https://www.seongnam.go.kr/apply/view.do?appIdx=2987&currentPage=1";
+  const resultText = document.getElementById("resultText").innerText;
+
+  const shareMessage = `솔로몬의 선택 이상형 테스트 결과는:
+${resultText}
+
+#솔로몬의선택 #이상형테스트 #성남시행사`; // 해시태그 추가 가능
+
+  // X (구 트위터)는 'text' 파라미터로 텍스트와 함께 URL을 직접 지정할 수 있습니다.
+  const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareMessage + '\n\n' + '테스트 참여: ' + testLink + '\n행사 신청: ' + eventLink)}`;
+  window.open(url, '_blank');
   toggleShareMenu();
 }
       </script>
