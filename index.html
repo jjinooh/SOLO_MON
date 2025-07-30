@@ -232,11 +232,16 @@
   <div class="container" id="result">
     <h1>🌈 당신의 이상형 결과는?</h1>
     <p id="resultText"><strong>결과 분석 중...</strong></p>
-    <p style="margin-top: 20px; font-size: 14px; line-height: 1.5;">
-      이상형을 만나고 싶다면?<br>
-      성남시 청춘남녀 만남 행사<br> <strong>'SOLO MON의 선택'</strong>에서 확인해보세요!
-    </p>
-    <button onclick="copyResult()">내 결과 친구에게 공유하기 📤</button>
+  <div class="share-container" style="position: relative; display: inline-block;">
+    <button onclick="toggleShareMenu()" class="share-main-button">📤 내 결과 공유하기</button>
+    <div id="shareMenu" class="share-menu" style="display: none; position: absolute; background: white; border: 1px solid #ddd; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); z-index: 100; margin-top: 5px;">
+      <button onclick="copyLink()" class="share-menu-item">🔗 링크 복사</button>
+      <button onclick="shareKakao()" class="share-menu-item">💬 카카오톡 공유</button>
+      <button onclick="shareLine()" class="share-menu-item">📲 라인 공유</button>
+      <button onclick="shareFacebook()" class="share-menu-item">📘 페이스북 공유</button>
+      <button onclick="shareX()" class="share-menu-item">✖️ X 공유</button>
+    </div>
+  </div>
     <button onclick="window.open('https://www.seongnam.go.kr/apply/view.do?appIdx=2987&currentPage=1')">행사 신청하러 가기 🎟</button>
     <p style="font-size: 12px; margin-top: 30px;">Made by <strong>JINO</strong></p>
   </div>
