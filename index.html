@@ -188,11 +188,16 @@
       document.getElementById("resultText").innerHTML = `<p><strong>${result.title}</strong></p><p>${result.desc}</p>`;
     }
 
-    function copyResult() {
-      const text = document.getElementById("resultText").innerText +
-        "\n\n'내 이상형을 만날 기회!'\n성남시 'SOLO MON의 선택' 신청하기 👉 https://www.seongnam.go.kr/apply/view.do?appIdx=2987&currentPage=1";
-      navigator.clipboard.writeText(text).then(() => {
-        alert("결과가 클립보드에 복사되었어요! 친구에게 붙여넣기 해보세요 ✨");
+function copyResult() {
+  const link = "https://jjinooh.github.io/SOLO_MON/";
+  const text = "당신의 이상형 결과는?\n" +
+    document.getElementById("resultText").innerText + "\n\n" +
+    "테스트 참여하기 👉 " + link + "\n" +
+    "'내 이상형을 만날 기회!'\n" +
+    "성남시 'SOLO MON의 선택' 신청하기 👉 https://www.seongnam.go.kr/apply/view.do?appIdx=2987&currentPage=1";
+
+  navigator.clipboard.writeText(text).then(() => {
+    alert("결과가 클립보드에 복사되었어요! 친구에게 붙여넣기 해보세요 ✨");
       });
     }
   </script>
