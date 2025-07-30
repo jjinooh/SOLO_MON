@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+  <script>
+    // 카카오 SDK 초기화
+    Kakao.init('939f16955e2d7c36b1281d8981b8b423'); // JavaScript 키
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SOLO MON의 선택</title>
@@ -282,8 +287,10 @@ function showResult() {
 
   const result = results[maxLetter] || results.DEFAULT;
   document.getElementById("resultText").innerHTML = `<p><strong>${result.title}</strong></p><p>${result.desc}</p>`;
+} // showResult 함수 닫기
 
-    function toggleShareMenu() {
+// 공유 관련 함수들을 showResult 함수 밖으로 이동
+function toggleShareMenu() {
   const menu = document.getElementById('shareMenu');
   if (menu) {
     menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
