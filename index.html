@@ -341,36 +341,37 @@ ${resultText}
 }
 
 function shareKakao() {
-  if (typeof Kakao !== 'undefined' && Kakao.isInitialized()) {
-    Kakao.Share.sendDefault({
-      objectType: 'feed',
-      content: {
-        title: '솔로몬의 선택 이상형 테스트 결과',
-        description: document.getElementById("resultText").innerText,
-        link: {
-          mobileWebUrl: 'https://jjinooh.github.io/SOLO_MON/',
-          webUrl: 'https://jjinooh.github.io/SOLO_MON/'
-        }
+  if (typeof Kakao !== 'undefined') {
+    const testLink = "https://jjinooh.github.io/SOLO_MON/";
+    const eventLink = "https://www.seongnam.go.kr/apply/view.do?appIdx=2987&currentPage=1";
+    const resultText = document.getElementById("resultText").innerText;
+
+    Kakao.Link.sendDefault({
+      objectType: 'text',
+      text: `솔로몬의 선택 이상형 테스트 결과는:\n${resultText}`, // 결과 텍스트를 메인 메시지로
+      link: {
+        webUrl: testLink, // 이 링크는 메시지 전체의 메인 링크
+        mobileWebUrl: testLink
       },
       buttons: [
         {
           title: '테스트 다시하기',
           link: {
-            mobileWebUrl: 'https://jjinooh.github.io/SOLO_MON/',
-            webUrl: 'https://jjinooh.github.io/SOLO_MON/'
-          }
+            webUrl: testLink,
+            mobileWebUrl: testLink,
+          },
         },
         {
-          title: '행사 신청하러 가기',
+          title: '행사 신청하러 가기', // 행사 신청 링크 버튼
           link: {
-            mobileWebUrl: 'https://www.seongnam.go.kr/apply/view.do?appIdx=2987&currentPage=1',
-            webUrl: 'https://www.seongnam.go.kr/apply/view.do?appIdx=2987&currentPage=1'
-          }
-        }
-      ]
+            webUrl: eventLink,
+            mobileWebUrl: eventLink,
+          },
+        },
+      ],
     });
   } else {
-    alert('카카오톡 공유 기능을 사용할 수 없습니다. SDK가 로드되었는지 확인해주세요.');
+    alert('카카오톡 공유 기능을 사용할 수 없습니다.');
   }
   toggleShareMenu();
 }
