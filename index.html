@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.5.0/kakao.min.js" integrity="sha384-kYPsUbBPlktVQK6V5wnguMJvl7qKh7ofQjQc13IakXNgkr6yme/cKQb/ozJVe0LJ" crossorigin="anonymous"></script>
-    <script>
-      // 카카오 SDK 초기화 (JavaScript 키는 그대로 사용)
-      Kakao.init('939f16955e2d7c36b1281d8981b8b423'); 
-    </script>
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.5.0/kakao.min.js" crossorigin="anonymous"></script>
+<script>
+  Kakao.init('939f16955e2d7c36b1281d8981b8b423'); // 본인의 JavaScript 키 사용
+</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SOLO MON의 선택</title>
@@ -324,41 +323,37 @@ ${resultText}
 }
 
 function shareKakao() {
-  if (typeof Kakao !== 'undefined') {
-    const testLink = "https://jjinooh.github.io/SOLO_MON/";
-    const eventLink = "https://www.seongnam.go.kr/apply/view.do?appIdx=2987&currentPage=1";
-    const resultText = document.getElementById("resultText").innerText;
-
-    Kakao.Share.sendDefault({  // Kakao.Link 대신 Kakao.Share 사용
-      objectType: 'feed',      // 'text' 대신 'feed' 사용
+  if (typeof Kakao !== 'undefined' && Kakao.isInitialized()) {
+    Kakao.Share.sendDefault({
+      objectType: 'feed',
       content: {
         title: '솔로몬의 선택 이상형 테스트 결과',
-        description: resultText,
-        imageUrl: 'https://jjinooh.github.io/SOLO_MON/image.jpg', // 대표 이미지 URL (필요시 실제 이미지로 교체)
+        description: document.getElementById("resultText").innerText,
+        imageUrl: 'https://jjinooh.github.io/SOLO_MON/image.jpg', // 실제 이미지 URL로 교체 필요
         link: {
-          mobileWebUrl: testLink,
-          webUrl: testLink
+          mobileWebUrl: 'https://jjinooh.github.io/SOLO_MON/',
+          webUrl: 'https://jjinooh.github.io/SOLO_MON/'
         }
       },
       buttons: [
         {
           title: '테스트 다시하기',
           link: {
-            mobileWebUrl: testLink,
-            webUrl: testLink,
-          },
+            mobileWebUrl: 'https://jjinooh.github.io/SOLO_MON/',
+            webUrl: 'https://jjinooh.github.io/SOLO_MON/'
+          }
         },
         {
           title: '행사 신청하러 가기',
           link: {
-            mobileWebUrl: eventLink,
-            webUrl: eventLink,
-          },
-        },
-      ],
+            mobileWebUrl: 'https://www.seongnam.go.kr/apply/view.do?appIdx=2987&currentPage=1',
+            webUrl: 'https://www.seongnam.go.kr/apply/view.do?appIdx=2987&currentPage=1'
+          }
+        }
+      ]
     });
   } else {
-    alert('카카오톡 공유 기능을 사용할 수 없습니다. 카카오 SDK가 로드되지 않았습니다.');
+    alert('카카오톡 공유 기능을 사용할 수 없습니다. SDK가 로드되었는지 확인해주세요.');
   }
   toggleShareMenu();
 }
