@@ -144,8 +144,8 @@
   <div class="container" id="question10">
     <div class="question-label">Q10.</div>
     <div class="question-text">데이트에서 가장 중요한 건...</div>
-    <button onclick="recordAnswer('F'); showResult(11)">💕 감정 교감</button>
-    <button onclick="recordAnswer('T'); showResult(11)">🧠 대화와 논리</button>
+    <button onclick="recordAnswer('F'); showQuestion(11)">💕 감정 교감</button>
+    <button onclick="recordAnswer('T'); showQuestion(11)">🧠 대화와 논리</button>
     <p class="comment" style="font-size: 12px; margin-top: auto; margin-bottom: 10px; color: #777; align-self: flex-end;">📌 로테이션 대화, 연애 코칭 등 다양한 프로그램이 마련되어 있다.</p>
   </div>
 
@@ -258,43 +258,85 @@
       answers.push(letter);
     }
 
-    function showResult() {
-      document.querySelectorAll('.container').forEach(c => c.style.display = 'none');
-      document.getElementById('result').style.display = 'flex';
+function showResult() {
+  document.querySelectorAll('.container').forEach(c => c.style.display = 'none');
+  document.getElementById('result').style.display = 'flex';
 
-      const counts = {};
-      answers.forEach(l => counts[l] = (counts[l] || 0) + 1);
+  const counts = {};
+  answers.forEach(l => counts[l] = (counts[l] || 0) + 1);
 
-      let maxLetter = Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
+  let maxLetter = Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
 
-      const results = {
-        E: { title: "열정적인 리더 타입 💃", desc: "사교적이고 주도적인 사람에게 끌려요." },
-        I: { title: "조용한 관찰자 타입 🧘", desc: "배려 깊고 내성적인 사람이 좋아요." },
-        S: { title: "현실적인 안식처 타입 🛋️", desc: "안정적이고 믿음직한 사람에게 매력을 느껴요." },
-        N: { title: "창의적인 낭만주의자 타입 🎨", desc: "자유롭고 상상력이 풍부한 사람에게 설레요." },
-        T: { title: "논리적인 조언자 타입 📊", desc: "이성적이고 논리적인 사람과 잘 맞아요." },
-        F: { title: "감성 충만 공감러 타입 🌸", desc: "감정을 잘 나누는 사람에게 편안함을 느껴요." },
-        J: { title: "계획형 신중파 타입 📅", desc: "체계적이고 계획적인 사람에게 안정감을 느껴요." },
-        P: { title: "즉흥적인 자유인 타입 🛫", desc: "즉흥적이고 유연한 사람이 좋아요." },
-        DEFAULT: { title: "다재다능한 동반자 타입 🧩", desc: "여러 성향이 조화로운 이상형이에요." }
-      };
+  const results = {
+    E: { title: "열정적인 리더 타입 💃", desc: "사교적이고 주도적인 사람에게 끌려요." },
+    I: { title: "조용한 관찰자 타입 🧘", desc: "배려 깊고 내성적인 사람이 좋아요." },
+    S: { title: "현실적인 안식처 타입 🛋️", desc: "안정적이고 믿음직한 사람에게 매력을 느껴요." },
+    N: { title: "창의적인 낭만주의자 타입 🎨", desc: "자유롭고 상상력이 풍부한 사람에게 설레요." },
+    T: { title: "논리적인 조언자 타입 📊", desc: "이성적이고 논리적인 사람과 잘 맞아요." },
+    F: { title: "감성 충만 공감러 타입 🌸", desc: "감정을 잘 나누는 사람에게 편안함을 느껴요." },
+    J: { title: "계획형 신중파 타입 📅", desc: "체계적이고 계획적인 사람에게 안정감을 느껴요." },
+    P: { title: "즉흥적인 자유인 타입 🛫", desc: "즉흥적이고 유연한 사람이 좋아요." },
+    DEFAULT: { title: "다재다능한 동반자 타입 🧩", desc: "여러 성향이 조화로운 이상형이에요." }
+  };
 
-      const result = results[maxLetter] || results.DEFAULT;
-      document.getElementById("resultText").innerHTML = `<p><strong>${result.title}</strong></p><p>${result.desc}</p>`;
-    }
+  const result = results[maxLetter] || results.DEFAULT;
+  document.getElementById("resultText").innerHTML = `<p><strong>${result.title}</strong></p><p>${result.desc}</p>`;
+  
+  // 결과가 표시된 후 자동으로 공유 메뉴 열기
+  setTimeout(() => {
+    toggleShareMenu();
+  }, 500); // 0.5초 후에 공유 메뉴 표시 (결과가 완전히 로드된 후)
+}
 
-function copyResult() {
+    function toggleShareMenu() {
+  const menu = document.getElementById('shareMenu');
+  if (menu) {
+    menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+  }
+}
+
+function copyLink() {
   const link = "https://jjinooh.github.io/SOLO_MON/";
-  const text = "당신의 이상형 결과는?\n" +
-    document.getElementById("resultText").innerText + "\n\n" +
-    "테스트 참여하기 👉 " + link + "\n" +
-    "'내 이상형을 만날 기회!'\n" +
-    "성남시 'SOLO MON의 선택' 신청하기 👉 https://www.seongnam.go.kr/apply/view.do?appIdx=2987&currentPage=1";
+  navigator.clipboard.writeText(link)
+    .then(() => alert("링크가 복사되었습니다!"))
+    .catch(err => alert("링크 복사에 실패했습니다: " + err));
+  toggleShareMenu();
+}
 
-  navigator.clipboard.writeText(text).then(() => {
-    alert("결과가 클립보드에 복사되었어요! 친구에게 붙여넣기 해보세요 ✨");
-      });
-    }
-  </script>
+function shareKakao() {
+  if (typeof Kakao !== 'undefined') {
+    Kakao.Link.sendDefault({
+      objectType: 'text',
+      text: '내 이상형 테스트 결과를 확인해보세요!',
+      link: {
+        webUrl: 'https://jjinooh.github.io/SOLO_MON/',
+        mobileWebUrl: 'https://jjinooh.github.io/SOLO_MON/'
+      }
+    });
+  } else {
+    alert('카카오톡 공유 기능을 사용할 수 없습니다.');
+  }
+  toggleShareMenu();
+}
+
+function shareLine() {
+  const url = "https://social-plugins.line.me/lineit/share?url=" + encodeURIComponent("https://jjinooh.github.io/SOLO_MON/");
+  window.open(url, '_blank');
+  toggleShareMenu();
+}
+
+function shareFacebook() {
+  const url = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent("https://jjinooh.github.io/SOLO_MON/");
+  window.open(url, '_blank');
+  toggleShareMenu();
+}
+
+function shareX() {
+  const text = encodeURIComponent("내 이상형 테스트 결과를 확인해보세요!");
+  const url = encodeURIComponent("https://jjinooh.github.io/SOLO_MON/");
+  window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+  toggleShareMenu();
+}
+      </script>
 </body>
 </html>
