@@ -502,18 +502,14 @@ ${resultText}
 
 function shareFacebook() {
   const testLink = "https://jjinooh.github.io/SOLO_MON/";
-  const eventLink = "https://www.seongnam.go.kr/apply/view.do?appIdx=2987&currentPage=1";
   const resultText = document.getElementById("resultText").innerText;
-
-  const shareMessage = `솔로몬의 선택 이상형 테스트 결과는:
-${resultText}
-
-테스트 참여하기: ${testLink}
-'내 이상형을 만날 기회!' 성남시 'SOLO MON의 선택' 신청하기: ${eventLink}`;
-
-  // Facebook은 'u' 파라미터를 통해 공유할 URL을 지정합니다. 여기에 테스트 링크를 넣고, 텍스트는 Facebook이 알아서 추출하도록 하거나, 공유 창에서 사용자가 직접 입력하도록 유도합니다.
-  // Facebook은 외부에서 텍스트를 강제로 주입하는 것을 제한하는 경우가 많아, 링크를 기본으로 공유하고 추가 텍스트는 사용자가 작성하는 방식이 일반적입니다.
-  const url = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(testLink) + "&quote=" + encodeURIComponent(shareMessage);
+  
+  // Facebook은 u 파라미터(URL)와 quote 파라미터(텍스트)를 사용합니다
+  const url = "https://www.facebook.com/sharer/sharer.php?u=" + 
+              encodeURIComponent(testLink) + 
+              "&quote=" + 
+              encodeURIComponent("솔로몬의 선택 이상형 테스트 결과:\n" + resultText);
+  
   window.open(url, '_blank');
   toggleShareMenu();
 }
