@@ -205,7 +205,7 @@
     <div class="question-label">Q12.</div>
     <div class="question-text">나랑 성격이 너무 다른 사람과 팀을 이뤄야 한다면?</div>
     <button onclick="recordAnswer('T'); showQuestion(13)">📊 객관적인 장단점을 분석해 업무 효율성을 높일 방법을 찾는다.</button>
-    <button onclick="recordAnswer('F'); showQuestion(13)">🤝 서로의 다름을 이해하고 맞춰가며 좋은 분위기를 만드는 데 집중한다.</button> 오히려 여유롭고 좋다</button>
+    <button onclick="recordAnswer('F'); showQuestion(13)">🤝 서로의 다름을 이해하고 맞춰가며 좋은 분위기를 만드는 데 집중한다.</button>
     <p class="comment" style="font-size: 12px; margin-top: auto; margin-bottom: 10px; color: #777; align-self: flex-start; text-align: center; width: 100%;">📌 자유로운 분위기 속에서 청년 간의 교류와 소통을 유도한다.</p>
   </div>
 
@@ -312,22 +312,125 @@ function showResult() {
   document.querySelectorAll('.container').forEach(c => c.style.display = 'none');
   document.getElementById('result').style.display = 'flex';
 
-  const counts = {};
-  answers.forEach(l => counts[l] = (counts[l] || 0) + 1);
-
-  let maxLetter = Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
-
-  const results = {
-    E: { title: "열정적인 리더 타입 💃", desc: "사교적이고 주도적인 사람에게 끌려요." },
-    I: { title: "조용한 관찰자 타입 🧘", desc: "배려 깊고 내성적인 사람이 좋아요." },
-    S: { title: "현실적인 안식처 타입 🛋️", desc: "안정적이고 믿음직한 사람에게 매력을 느껴요." },
-    N: { title: "창의적인 낭만주의자 타입 🎨", desc: "자유롭고 상상력이 풍부한 사람에게 설레요." },
-    T: { title: "논리적인 조언자 타입 📊", desc: "이성적이고 논리적인 사람과 잘 맞아요." },
-    F: { title: "감성 충만 공감러 타입 🌸", desc: "감정을 잘 나누는 사람에게 편안함을 느껴요." },
-    J: { title: "계획형 신중파 타입 📅", desc: "체계적이고 계획적인 사람에게 안정감을 느껴요." },
-    P: { title: "즉흥적인 자유인 타입 🛫", desc: "즉흥적이고 유연한 사람이 좋아요." },
-    DEFAULT: { title: "다재다능한 동반자 타입 🧩", desc: "여러 성향이 조화로운 이상형이에요." }
+  // 응답 수 계산
+  const counts = {
+    'E': 0, 'I': 0,
+    'S': 0, 'N': 0,
+    'T': 0, 'F': 0,
+    'J': 0, 'P': 0
   };
+  
+  answers.forEach(l => {
+    if (counts[l] !== undefined) {
+      counts[l]++;
+    }
+  });
+  
+  // 각 MBTI 지표별 우세한 성향 결정
+  let finalMBTI = "";
+  finalMBTI += (counts['E'] >= counts['I']) ? 'E' : 'I';
+  finalMBTI += (counts['S'] >= counts['N']) ? 'S' : 'N';
+  finalMBTI += (counts['T'] >= counts['F']) ? 'T' : 'F';
+  finalMBTI += (counts['J'] >= counts['P']) ? 'J' : 'P';
+
+  // MBTI 유형별 설명, 궁합, 이모티콘 정보
+  const mbtiInfo = {
+    'ENFJ': {
+      tendency: "외향적인 조력가 (ENFJ) 유형이군요! 타인의 성장과 발전에 열정적인 지지를 보내며 사람들을 이끄는 리더형입니다.",
+      compatible: "당신과 잘 맞는 이상형은 논리적이고 비전을 가진 <span class='hotpink-text'>INTP, INTJ</span> 유형입니다.",
+      emoji: "👑✨"
+    },
+    'ENFP': {
+      tendency: "재기발랄한 활동가 (ENFP) 유형이군요! 상상력이 풍부하고 항상 새로운 가능성을 탐구하며 주변에 영감을 주는 에너자이저입니다.",
+      compatible: "당신과 잘 맞는 이상형은 분석적이고 독립적인 <span class='hotpink-text'>INTJ, INFJ</span> 유형입니다.",
+      emoji: "🦋🌈"
+    },
+    'ENTJ': {
+      tendency: "대담한 통솔자 (ENTJ) 유형이군요! 타고난 리더십과 뛰어난 분석력으로 목표 달성을 위해 거침없이 나아가는 전략가형입니다.",
+      compatible: "당신과 잘 맞는 이상형은 조용하고 사색적인 <span class='hotpink-text'>INTP, INFJ</span> 유형입니다.",
+      emoji: "🚀💼"
+    },
+    'ENTP': {
+      tendency: "뜨거운 논쟁을 즐기는 변론가 (ENTP) 유형이군요! 지적 호기심이 많고 혁신적인 아이디어로 기존 틀을 깨는 것을 즐기는 유형입니다.",
+      compatible: "당신과 잘 맞는 이상형은 성실하고 안정적인 <span class='hotpink-text'>INFJ, INTJ</span> 유형입니다.",
+      emoji: "💡🔍"
+    },
+    'ESFJ': {
+      tendency: "사교적인 외교관 (ESFJ) 유형이군요! 사람들과 어울리기를 좋아하고 타인을 진심으로 배려하며 화합을 이끄는 조력가형입니다.",
+      compatible: "당신과 잘 맞는 이상형은 활기차고 현실적인 <span class='hotpink-text'>ISFP, ISTP</span> 유형입니다.",
+      emoji: "🤗💝"
+    },
+    'ESFP': {
+      tendency: "자유로운 연예인 (ESFP) 유형이군요! 즉흥적이고 넘치는 에너지로 주변을 즐겁게 만들며 현재를 만끽하는 자유로운 영혼입니다.",
+      compatible: "당신과 잘 맞는 이상형은 체계적이고 신중한 <span class='hotpink-text'>ISTJ, ISFJ</span> 유형입니다.",
+      emoji: "🎭🎉"
+    },
+    'ESTJ': {
+      tendency: "엄격한 관리자 (ESTJ) 유형이군요! 현실적이고 체계적이며 약속을 중요시하여 주변을 효율적으로 이끄는 조직가형입니다.",
+      compatible: "당신과 잘 맞는 이상형은 유연하고 적응력이 뛰어난 <span class='hotpink-text'>ISFP, ISTP</span> 유형입니다.",
+      emoji: "📊📋"
+    },
+    'ESTP': {
+      tendency: "활동적인 사업가 (ESTP) 유형이군요! 대담하고 현실적이며 넘치는 에너지로 도전을 즐기는 모험가형입니다.",
+      compatible: "당신과 잘 맞는 이상형은 침착하고 배려심 깊은 <span class='hotpink-text'>ISFJ, ISTJ</span> 유형입니다.",
+      emoji: "🏄‍♂️💪"
+    },
+    'INFJ': {
+      tendency: "선의의 옹호자 (INFJ) 유형이군요! 깊은 통찰력과 강한 신념을 가지고 이상을 추구하며 타인의 성장을 돕는 이타적인 유형입니다.",
+      compatible: "당신과 잘 맞는 이상형은 에너지가 넘치고 영감을 주는 <span class='hotpink-text'>ENFP, ENTP</span> 유형입니다.",
+      emoji: "🔮💭"
+    },
+    'INFP': {
+      tendency: "열정적인 중재자 (INFP) 유형이군요! 온화하고 사려 깊으며 자신의 가치를 중요시하고 타인을 이해하는 데 뛰어난 이상주의자입니다.",
+      compatible: "당신과 잘 맞는 이상형은 논리적이고 비전이 있는 <span class='hotpink-text'>ENTJ, ENFJ</span> 유형입니다.",
+      emoji: "🌱🌟"
+    },
+        'INTJ': {
+      tendency: "용의주도한 전략가 (INTJ) 유형이군요! 독립적이고 분석적이며 뛰어난 지략으로 복잡한 문제를 해결하는 통찰력 있는 사상가입니다.",
+      compatible: "당신과 잘 맞는 이상형은 외향적이고 감성적인 <span class='hotpink-text'>ENFP, ENTP</span> 유형입니다.",
+      emoji: "🧠🔭"
+    },
+    'INTP': {
+      tendency: "논리적인 사색가 (INTP) 유형이군요! 끊임없이 지식을 탐구하고 복잡한 시스템을 분석하며 새로운 이론을 탐구하는 독창적인 유형입니다.",
+      compatible: "당신과 잘 맞는 이상형은 따뜻하고 사교적인 <span class='hotpink-text'>ENFJ, ENTJ</span> 유형입니다.",
+      emoji: "🔬📚"
+    },
+    'ISFJ': {
+      tendency: "용감한 수호자 (ISFJ) 유형이군요! 책임감이 강하고 헌신적이며 주변 사람들을 묵묵히 돕는 데 뛰어난 봉사자형입니다.",
+      compatible: "당신과 잘 맞는 이상형은 활동적이고 현실적인 <span class='hotpink-text'>ESFP, ESTP</span> 유형입니다.",
+      emoji: "🛡️🤲"
+    },
+    'ISFP': {
+      tendency: "호기심 많은 예술가 (ISFP) 유형이군요! 겸손하고 온화하며 새로운 경험을 즐기고 아름다움을 추구하는 섬세한 감수성 유형입니다.",
+      compatible: "당신과 잘 맞는 이상형은 체계적이고 신뢰할 수 있는 <span class='hotpink-text'>ESTJ, ESFJ</span> 유형입니다.",
+      emoji: "🎨🌷"
+    },
+    'ISTJ': {
+      tendency: "청렴결백한 논리주의자 (ISTJ) 유형이군요! 원칙을 중요시하고 신중하며 책임감이 강하여 맡은 일을 완벽하게 처리하는 성실한 유형입니다.",
+      compatible: "당신과 잘 맞는 이상형은 외향적이고 적응력 있는 <span class='hotpink-text'>ESFP, ESTP</span> 유형입니다.",
+      emoji: "📏⏱️"
+    },
+    'ISTP': {
+      tendency: "만능 재주꾼 (ISTP) 유형이군요! 독립적이고 현실적이며 문제 해결 능력이 뛰어나고 기계를 잘 다루는 재주가 많은 실용주의자입니다.",
+      compatible: "당신과 잘 맞는 이상형은 사교적이고 안정적인 <span class='hotpink-text'>ESFJ, ESTJ</span> 유형입니다.",
+      emoji: "🔧🏹"
+    },
+    'DEFAULT': { // 20문항으로 결과가 명확히 나오지 않거나 오류 시 사용
+      tendency: "당신은 아직 미지의 매력을 가진 유형이군요!",
+      compatible: "당신과 잘 맞는 이상형은 <span class='hotpink-text'>다양한 매력을 가진 사람</span>입니다.",
+      emoji: "✨🌈"
+    }
+  };
+
+  const currentMBTIInfo = mbtiInfo[finalMBTI] || mbtiInfo.DEFAULT;
+
+  // 큰 이모티콘 스타일로 결과 표시
+  document.getElementById("resultText").innerHTML = `
+    <div style="font-size: 48px; margin: 20px 0;">${currentMBTIInfo.emoji}</div>
+    <p>당신은 <span class="hotpink-text"><strong>${currentMBTIInfo.tendency}</strong></span></p>
+    <p>${currentMBTIInfo.compatible}</p>
+  `;
+}
 
   const result = results[maxLetter] || results.DEFAULT;
   document.getElementById("resultText").innerHTML = `<p><strong>${result.title}</strong></p><p>${result.desc}</p>`;
