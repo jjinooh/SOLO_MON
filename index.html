@@ -346,8 +346,12 @@ function showResult() {
   document.getElementById('result').style.display = 'flex';
 
   // 응답 수 계산 (기존 코드)
-  const counts = { /* ... */ };
-  answers.forEach(l => { /* ... */ });
+  const counts = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
+  answers.forEach(letter => {
+    if (counts.hasOwnProperty(letter)) {
+      counts[letter]++;
+    }
+  });
   
   // 각 MBTI 지표별 우세한 성향 결정 (기존 코드)
   let finalMBTI = "";
