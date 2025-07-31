@@ -9,6 +9,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SOLO MON의 선택</title>
   <style>
+.page-title {
+  position: absolute; /* 절대 위치 지정 */
+  top: 20px; /* 컨테이너 상단에서 20px 아래로 배치 (패딩) */
+  left: 50%; /* 컨테이너 가로 중앙에 배치 시작 */
+  transform: translateX(-50%); /* 본인 너비의 50%만큼 왼쪽으로 이동하여 완벽한 중앙 정렬 */
+  width: calc(100% - 40px); /* 컨테이너 패딩(좌우 20px씩)을 제외한 너비 */
+  text-align: center; /* 텍스트 가운데 정렬 */
+  font-size: 20px; /* 폰트 크기 */
+  color: #ff3c7e; /* 핫핑크 색상 */
+  margin: 0; /* h2 태그의 기본 마진 제거 */
+  padding: 0; /* h2 태그의 기본 패딩 제거 */
+  box-sizing: border-box; /* 너비 계산 시 패딩 포함 */
+  z-index: 10; /* 다른 요소 위에 표시되도록 */
+}      
     body {
       font-family: "Arial", sans-serif;
       background-color: #f5f5f5;
@@ -23,15 +37,15 @@
   width: 420px;
   height: 420px;
   overflow-y: auto;
-  padding: 30px 20px;
-  box-sizing: border-box;  
+  padding: 70px 20px 30px 20px; /* 상단 패딩을 70px로 늘림 */
+  box-sizing: border-box;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   display: none;
   flex-direction: column;
-  justify-content: center; /* space-between에서 center로 변경 */
+  justify-content: center;
   align-items: center;
-  position: relative; /* 추가: 내부 요소의 절대 위치 지정을 위함 */
+  position: relative; /* 이 속성이 꼭 있어야 `position: absolute`가 컨테이너 기준으로 동작해요! (현재 코드는 이미 잘 되어 있어요!) */
 }
     #intro {
       display: flex;
@@ -114,7 +128,7 @@
   </div>
 
   <div class="container" id="question1">
-    <h2 style="font-size: 20px; margin-top: 0; margin-bottom: 30px; color: #ff3c7e; width: 100%; text-align: center; position: relative; top: 0;">솔로몬의 선택 이상형 테스트</h2>
+    <h2 class="page-title">솔로몬의 선택 이상형 테스트</h2>
     <div class="question-label">Q1.</div>
     <div class="question-text">연인과의 데이트 약속이 잡히면 나는...</div>
     <button onclick="recordAnswer('E'); showQuestion(2)">🗣️ 사람이 많은 곳이나 새로운 활동을 함께 하고 싶다.</button>
@@ -123,7 +137,7 @@
   </div>
 
   <div class="container" id="question2">
-    <h2 style="font-size: 20px; margin-top: 0; margin-bottom: 30px; color: #ff3c7e; width: 100%; text-align: center; position: relative; top: 0;">솔로몬의 선택 이상형 테스트</h2>
+    <h2 class="page-title">솔로몬의 선택 이상형 테스트</h2>
     <div class="question-label">Q2.</div>
     <div class="question-text">연인과 친구, 가족이 함께하는 자리에 가면 나는...</div>
     <button onclick="recordAnswer('E'); showQuestion(3)">😊 적극적으로 대화에 참여하고 모두와 어울린다.</button>
@@ -132,7 +146,7 @@
   </div>
 
   <div class="container" id="question3">
-    <h2 style="font-size: 20px; margin-top: 0; margin-bottom: 30px; color: #ff3c7e; width: 100%; text-align: center; position: relative; top: 0;">솔로몬의 선택 이상형 테스트</h2>
+    <h2 class="page-title">솔로몬의 선택 이상형 테스트</h2>
     <div class="question-label">Q3.</div>
     <div class="question-text">연애 중 힘들거나 스트레스받을 때 나는...</div>
     <button onclick="recordAnswer('E'); showQuestion(4)">🗣️ 연인이나 친구들과 만나 얘기하며 에너지를 회복한다.</button>
@@ -141,7 +155,7 @@
   </div>
 
   <div class="container" id="question4">
-    <h2 style="font-size: 20px; margin-top: 0; margin-bottom: 30px; color: #ff3c7e; width: 100%; text-align: center; position: relative; top: 0;">솔로몬의 선택 이상형 테스트</h2>
+    <h2 class="page-title">솔로몬의 선택 이상형 테스트</h2>
     <div class="question-label">Q4.</div>
     <div class="question-text">연인에게 사랑을 표현할 때 나는 주로...</div>
     <button onclick="recordAnswer('E'); showQuestion(5)">💖 직접적인 말과 행동, 스킨십으로 자주 표현한다.</button>
