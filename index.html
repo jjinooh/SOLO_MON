@@ -334,31 +334,37 @@
   </div>  
   
   <div class="container" id="result">
-        <h1>💘 당신의 이상형 결과는?</h1>
-        <p id="resultText"><strong>결과 분석 중...</strong></p>
-      <div class="share-container" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 20px;">
-  <button onclick="toggleShareMenu()" class="result-action-button">📤 내 결과 공유하기</button>
-  <button onclick="restartTest()" class="result-action-button">🔁 테스트 다시 하기</button>
-</div>
+  <h1>💘 당신의 이상형 결과는?</h1>
+  <p id="resultText"><strong>결과 분석 중...</strong></p>
 
-<!-- 공유 메뉴는 그대로 유지 -->
-<div id="shareMenu" class="share-menu" style="display: none; position: absolute; background: white; border: 1px solid #ddd; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); z-index: 100; margin-top: 5px; left: 50%; transform: translateX(-50%);">
-  <button onclick="copyLink()" class="share-menu-item">🔗 링크 복사</button>
-  <button onclick="shareKakao()" class="share-menu-item">💬 카카오톡</button>
-  <button onclick="shareLine()" class="share-menu-item">📲 라인</button>
-  <button onclick="shareFacebook()" class="share-menu-item">📘 페이스북</button>
-  <button onclick="shareX()" class="share-menu-item">✖️ X</button>
-</div>
-      </div>
-    <!-- 여기에 새로운 멘트 추가 -->
-        <p style="font-size: 14px; margin-top: 20px; margin-bottom: 10px; line-height: 1.4;">
-        내 이상형을 만나고 싶다면? <br>
-        성남시 청춘남녀 만남행사 <span class="hotpink-text"><strong>'SOLO MON의 선택'</strong></span>에 참가하세요!
-        </p>
-<button onclick="window.open('https://www.seongnam.go.kr/apply/view.do?appIdx=2987&currentPage=1', '_blank')">🎟 행사 신청하러 가기</button>
-</a>
+  <!-- 공유 & 다시하기 버튼 묶음 -->
+  <div class="share-container" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 20px;">
+    <button onclick="toggleShareMenu()" class="result-action-button">📤 내 결과 공유하기</button>
+    <button onclick="restartTest()" class="result-action-button">🔁 테스트 다시 하기</button>
+  </div>
 
-<p style="font-size: 11px; margin-top: 30px;">Made by <strong>JINO #내이상형은너</strong></p>
+  <!-- 공유 메뉴 -->
+  <div id="shareMenu" class="share-menu" style="display: none; position: absolute; background: white; border: 1px solid #ddd; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); z-index: 100; margin-top: 5px; left: 50%; transform: translateX(-50%);">
+    <button onclick="copyLink()" class="share-menu-item">🔗 링크 복사</button>
+    <button onclick="shareKakao()" class="share-menu-item">💬 카카오톡</button>
+    <button onclick="shareLine()" class="share-menu-item">📲 라인</button>
+    <button onclick="shareFacebook()" class="share-menu-item">📘 페이스북</button>
+    <button onclick="shareX()" class="share-menu-item">✖️ X</button>
+  </div>
+
+  <!-- 행사 소개 문구 -->
+  <p style="font-size: 14px; margin-top: 20px; margin-bottom: 10px; line-height: 1.4;">
+    내 이상형을 만나고 싶다면? <br>
+    성남시 청춘남녀 만남행사 <span class="hotpink-text"><strong>'SOLO MON의 선택'</strong></span>에 참가하세요!
+  </p>
+
+  <!-- 행사 신청 버튼 (단독) -->
+  <button onclick="window.open('https://www.seongnam.go.kr/apply/view.do?appIdx=2987&currentPage=1', '_blank')" class="result-action-button" style="margin-top: 10px;">
+    🎟 행사 신청하러 가기
+  </button>
+
+  <p style="font-size: 11px; margin-top: 30px;">Made by <strong>JINO #내이상형은너</strong></p>
+</div>
 
   <script>
     let answers = [];
