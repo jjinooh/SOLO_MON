@@ -9,6 +9,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SOLO MON의 선택</title>
   <style>
+.result-action-button {
+  font-size: 13px;
+  padding: 8px 14px;
+  border-radius: 18px;
+  border: none;
+  background-color: #ff3c7e;
+  color: white;
+  cursor: pointer;
+  margin: 4px;
+  white-space: nowrap;
+}
+
+.result-action-button:hover {
+  background-color: #e1326f;
+}
+      
 .page-title {
   position: absolute;
   top: 20px;
@@ -320,9 +336,13 @@
   <div class="container" id="result">
         <h1>💘 당신의 이상형 결과는?</h1>
         <p id="resultText"><strong>결과 분석 중...</strong></p>
-      <div class="share-container" style="position: relative; display: inline-block;">
-        <button onclick="toggleShareMenu()" class="share-main-button">📤 내 결과 공유하기</button>
-        <div id="shareMenu" class="share-menu" style="display: none; position: absolute; background: white; border: 1px solid #ddd; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); z-index: 100; margin-top: 5px; left: 50%; transform: translateX(-50%);">
+      <div class="share-container" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 20px;">
+  <button onclick="toggleShareMenu()" class="result-action-button">📤 내 결과 공유하기</button>
+  <button onclick="restartTest()" class="result-action-button">🔁 테스트 다시 하기</button>
+</div>
+
+<!-- 공유 메뉴는 그대로 유지 -->
+<div id="shareMenu" class="share-menu" style="display: none; position: absolute; background: white; border: 1px solid #ddd; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); z-index: 100; margin-top: 5px; left: 50%; transform: translateX(-50%);">
   <button onclick="copyLink()" class="share-menu-item">🔗 링크 복사</button>
   <button onclick="shareKakao()" class="share-menu-item">💬 카카오톡</button>
   <button onclick="shareLine()" class="share-menu-item">📲 라인</button>
@@ -338,7 +358,6 @@
 <button onclick="window.open('https://www.seongnam.go.kr/apply/view.do?appIdx=2987&currentPage=1', '_blank')">🎟 행사 신청하러 가기</button>
 </a>
 
-<button onclick="restartTest()" style="margin-top: 20px;">🔁 테스트 다시 하기</button>        
 <p style="font-size: 11px; margin-top: 30px;">Made by <strong>JINO #내이상형은너</strong></p>
 
   <script>
