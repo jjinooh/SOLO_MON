@@ -67,11 +67,21 @@
       background-color: #ff3c7e;
       color: white;
       border: none;
-      padding: 10px 20px;
+      padding: 12px 16px;
       font-size: 14px;
       border-radius: 20px;
       cursor: pointer;
-      margin: 5px;
+      margin: 6px 0;
+      min-height: 60px; /* 높이 통일 */
+      width: 100%; /* 너비 통일 */
+      box-sizing: border-box;
+      line-height: 1.4;
+      white-space: normal; /* 줄바꿈 허용 */
+      word-break: keep-all; /* 단어 단위로 줄바꿈 */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
     }
     button:hover {
       background-color: #e1326f;
@@ -327,6 +337,8 @@
         </p>
 <button onclick="window.open('https://www.seongnam.go.kr/apply/view.do?appIdx=2987&currentPage=1', '_blank')">🎟 행사 신청하러 가기</button>
 </a>
+
+<button onclick="restartTest()" style="margin-top: 20px;">🔁 테스트 다시 하기</button>        
 <p style="font-size: 11px; margin-top: 30px;">Made by <strong>JINO #내이상형은너</strong></p>
 
   <script>
@@ -340,7 +352,11 @@
     function recordAnswer(letter) {
       answers.push(letter);
     }
-
+function restartTest() {
+  answers = []; // 기존 응답 초기화
+  showQuestion(1); // 첫 번째 질문 화면으로 이동
+}
+      
 function showResult() {
   document.querySelectorAll('.container').forEach(c => c.style.display = 'none');
   document.getElementById('result').style.display = 'flex';
