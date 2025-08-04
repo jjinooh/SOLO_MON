@@ -363,7 +363,14 @@
   <button onclick="toggleShareMenu()" class="result-action-button">📤 공유하기</button>
   <button onclick="restartTest()" class="result-action-button">🔁 다시 하기</button>
 </div>
-
+<div id="shareMenu" class="share-menu" style="display: none; position: absolute; background: white; border: 1px solid #ddd; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); z-index: 100; margin-top: 5px; left: 50%; transform: translateX(-50%);">
+  <button onclick="copyLink()" class="share-menu-item">🔗 링크 복사</button>
+  <button onclick="shareKakao()" class="share-menu-item">💬 카카오톡</button>
+  <button onclick="shareLine()" class="share-menu-item">📲 라인</button>
+  <button onclick="shareFacebook()" class="share-menu-item">📘 페이스북</button>
+  <button onclick="shareX()" class="share-menu-item">✖️ X</button>
+</div>
+      
 <!-- 안내 문구 -->
 <p style="font-size: 14px; margin-top: 20px; margin-bottom: 10px; line-height: 1.4; text-align: center;">
   내 이상형을 만나고 싶다면? <br>
