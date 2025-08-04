@@ -11,16 +11,18 @@
   <style>
 .result-action-button {
   font-size: 12px;
-  padding: 6px 10px;
+  padding: 6px 12px;
   border-radius: 14px;
   border: none;
   background-color: #ff3c7e;
   color: white;
   cursor: pointer;
-  margin: 0;
+  margin: 4px;
   white-space: nowrap;
   line-height: 1;
   min-height: 28px;
+  width: auto;          /* ← 가로 길이 자동 */
+  max-width: 150px;     /* ← 최대 너비 제한 */
   transition: background-color 0.2s ease;
 }
 
@@ -379,7 +381,8 @@
   </p>
 
   <!-- 행사 신청 버튼 (단독) -->
-  <button onclick="window.open('https://www.seongnam.go.kr/apply/view.do?appIdx=2987&currentPage=1', '_blank')" class="result-action-button" style="margin-top: 10px;">
+  <div style="display: flex; justify-content: center;">    
+  <button onclick="window.open('https://www.seongnam.go.kr/apply/view.do?appIdx=2987&currentPage=1', '_blank')" class="result-action-button">
     🎟 행사 신청하러 가기
   </button>
 
