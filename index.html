@@ -130,13 +130,21 @@
     }
 
     .share-menu-item {
-      flex: 1;
-      margin: 2px;
-      white-space: nowrap;
-      min-width: fit-content;
-      font-size: 12px; /* 폰트 크기 줄이기 */
-      padding: 8px 12px; /* 패딩 조정 */
-    }
+  font-size: 11px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 12px;
+  background-color: #f0f0f0;
+  cursor: pointer;
+  margin: 2px;
+  white-space: nowrap;
+  transition: background-color 0.2s ease;
+}
+
+.share-menu-item:hover {
+  background-color: #eaeaea;
+}
+
   
     #result {
       height: auto;
