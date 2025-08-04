@@ -118,32 +118,40 @@
       width: 90%; /* 너비 조정 */
     }
     .share-menu {
-      /* 기존 display: none; position: absolute; background: white; border: 1px solid #ddd; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); z-index: 100; margin-top: 5px; 이 부분은 HTML에 style=""로 남아있으니, CSS에서는 이 새로운 flex 관련 속성들만 추가하면 됩니다. */
-      display: flex;       /* 가로 배치를 위한 flex 설정 */
-      flex-direction: row; /* 가로 방향으로 배치 */
-      flex-wrap: wrap;     /* 공간이 부족하면 다음 줄로 넘김 */
-      width: auto;         /* 내용에 따라 너비 자동 조절 */
-      padding: 5px;        /* 내부 여백 유지 */
-      /* min-width: 300px;  // 필요하다면 최소 너비 설정 (짤림 방지) */
-      box-sizing: border-box; /* 패딩이 너비 계산에 포함되도록 */
-      max-width: 100%; /* 부모 너비를 넘지 않도록 (가로 스크롤 방지) */
-    }
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  max-width: 300px;
+}
 
-    .share-menu-item {
+.share-menu-item {
   font-size: 11px;
   padding: 5px 10px;
   border: none;
   border-radius: 12px;
-  background-color: #f0f0f0;
+  background-color: #ff3c7e; /* 핫핑크 배경 */
+  color: white;
   cursor: pointer;
   margin: 2px;
   white-space: nowrap;
+  height: auto;
+  min-height: 26px;
+  line-height: 1.2;
   transition: background-color 0.2s ease;
 }
 
 .share-menu-item:hover {
-  background-color: #eaeaea;
+  background-color: #e1326f; /* 딥 핑크로 호버 효과 */
 }
+
 
   
     #result {
